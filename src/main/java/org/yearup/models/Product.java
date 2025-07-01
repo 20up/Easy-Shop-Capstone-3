@@ -11,14 +11,13 @@ public class Product
     private String description;
     private String color;
     private int stock;
-    private boolean isFeatured;
+    private boolean featured;  // renamed from isFeatured for Java bean naming consistency
     private String imageUrl;
 
-    public Product()
-    {
-    }
+    public Product() { }
 
-    public Product(int productId, String name, BigDecimal price, int categoryId, String description, String color, int stock, boolean isFeatured, String imageUrl)
+    public Product(int productId, String name, BigDecimal price, int categoryId, String description,
+                   String color, int stock, boolean featured, String imageUrl)
     {
         this.productId = productId;
         this.name = name;
@@ -27,7 +26,7 @@ public class Product
         this.description = description;
         this.color = color;
         this.stock = stock;
-        this.isFeatured = isFeatured;
+        this.featured = featured;
         this.imageUrl = imageUrl;
     }
 
@@ -103,12 +102,12 @@ public class Product
 
     public boolean isFeatured()
     {
-        return isFeatured;
+        return featured;
     }
 
     public void setFeatured(boolean featured)
     {
-        isFeatured = featured;
+        this.featured = featured;
     }
 
     public String getImageUrl()

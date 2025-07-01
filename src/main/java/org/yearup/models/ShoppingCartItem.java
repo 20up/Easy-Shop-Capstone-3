@@ -10,7 +10,6 @@ public class ShoppingCartItem
     private int quantity = 1;
     private BigDecimal discountPercent = BigDecimal.ZERO;
 
-
     public Product getProduct()
     {
         return product;
@@ -44,15 +43,18 @@ public class ShoppingCartItem
     @JsonIgnore
     public int getProductId()
     {
-        return this.product.getProductId();
+        return product != null ? product.getProductId() : 0;
     }
 
     public BigDecimal getLineTotal()
     {
-        BigDecimal basePrice = product.getPrice();
-        BigDecimal quantity = new BigDecimal(this.quantity);
+        if (product == null || product.getPrice() == null)
+            return BigDecimal.ZERO;
 
-        BigDecimal subTotal = basePrice.multiply(quantity);
+        BigDecimal basePrice = product.getPrice();
+        BigDecimal quantityDecimal = BigDecimal.valueOf(quantity);
+
+        BigDecimal subTotal = basePrice.multiply(quantityDecimal);
         BigDecimal discountAmount = subTotal.multiply(discountPercent);
 
         return subTotal.subtract(discountAmount);
